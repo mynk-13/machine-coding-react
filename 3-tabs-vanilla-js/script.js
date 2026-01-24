@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function(){
             const tabContents=document.querySelectorAll(".tabContents");
             const tabLinks=document.querySelectorAll(".tabLinks");
 
+            //add or remove "active" and not ".active" as css will look for ".active" used "active"
             tabContents.forEach((tab)=>tab.classList.remove("active"));
             tabLinks.forEach((tab)=> tab.classList.remove("active"));
 
