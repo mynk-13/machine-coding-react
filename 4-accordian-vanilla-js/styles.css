@@ -1,0 +1,45 @@
+body{
+
+    font-family: sans-serif;
+    padding: 20px;
+    margin:0;
+}
+
+.accordian{
+ border: 1px solid #bbb;
+}
+
+
+.accordian-item{
+
+    border-bottom: 1px solid #bbb;
+
+
+}
+
+.accordian-header{
+
+    background-color: rgb(1, 1, 24);
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.accordian-header.active{
+
+    background-color: rgb(1, 1, 24);
+    color: white;
+}
+
+.accordian-content{
+
+    font-size: 16px;
+    display: none;
+    
+}
+
+.accordian-content.active{
+
+    display: block;
+    padding: 10px;
+}
