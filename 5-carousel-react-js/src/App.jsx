@@ -18,7 +18,7 @@ import Carousel from "./components/Carousel";
 import "./App.css";
 
 const App = () => {
-  let imageLimit=100, imagePerSlide=5;
+  let imageLimit=100, imagePerSlide=3;
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
