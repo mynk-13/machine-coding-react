@@ -21,7 +21,7 @@ const Carousel = ({
 
    
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+      setCurrentIndex((prev) => (prev - imagePerSlide + images.length) % images.length);
       setIsMoving(false);
     }, 500);
   };
@@ -34,7 +34,7 @@ const Carousel = ({
 
     
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
+      setCurrentIndex((prev) => (prev + imagePerSlide) % images.length);
       setIsMoving(false);
     }, 500);
   };
@@ -66,7 +66,7 @@ const Carousel = ({
             height: "100%",
             width: "100%",
             transition: isMoving ? "transform 0.5s ease-in-out" : "none",
-            transform: isMoving ? (direction === 'next' ? `translateX(-${itemWidth}%)` : `translateX(${itemWidth}%)`): `translateX(0)`,
+            transform: isMoving ? (direction === 'next' ? `translateX(-${itemWidth*imagePerSlide}%)` : `translateX(${itemWidth*imagePerSlide}%)`): `translateX(0)`,
           }}
         >
           {Array.from(
