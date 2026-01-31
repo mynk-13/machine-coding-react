@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     const app= document.querySelector(".app");
     let products=[];
-    let page=1; let pageSize=10;
+    let page=1; let pageSize=8;
 
 
     const fetchProducts=async ()=>{
