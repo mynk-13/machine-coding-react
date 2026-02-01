@@ -28,8 +28,6 @@
 
 
 .pagination{
-
-  position: fixed;
   margin:15px 0;
   padding: 10px;
   display: flex;

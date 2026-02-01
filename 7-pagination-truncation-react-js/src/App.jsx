@@ -1,42 +1,42 @@
 
 import { useEffect, useState } from 'react';
 import './App.css'
+import Pagination from './components/Pagination';
 
 function App() {
 
-  let pageSize=10;
+  let pageSize=10; const maxVisiblePages=5;
   const [products,setProducts]=useState([]);
   const [page, setPage]=useState(1);
+  const [totalPages, setTotalPages]=useState(0);
 
   const fetchProducts=async ()=>{
 
-    const res= await fetch('https://dummyjson.com/products?limit=100');
+    const res= await fetch(`https://dummyjson.com/products?limit=${pageSize}&skip=${page*pageSize-pageSize}`);
     const data= await res.json();
 
     //console.log(data);
 
     if(data && data.products){
-      console.log(data);
+      console.log(data.products);
       setProducts(data.products);
+      setTotalPages(Math.ceil(data.total/pageSize));
     }
     
 
   }
 
-  const selectPageHandler=(selectedPage)=>{
-    setPage(selectedPage);
-  }
-  
+ 
 
 
   useEffect(()=>{
     fetchProducts();
-  },[])
+  },[page]);
 
   return (
     <div className='app'>
       {products.length >0  && <div className='products'>
-            {products.slice(page*pageSize-pageSize,page*pageSize).map((prod)=> {    
+            {products.map((prod)=> {    
               return <span key={prod.id} className='products__single'>
                 <img src={prod.thumbnail} alt={prod.title} />
                 <span>{prod.title}</span>
@@ -45,20 +45,13 @@ function App() {
           )}
         </div>}
 
-        {products.length >0 &&  <div className='pagination'>
-            <span 
-              style={page===1 ? {"display":'none'} : {"display":'block'}}
-              onClick={()=> selectPageHandler(prev=>prev-1)}>◀</span>
-            {[...Array(products.length/pageSize)].map((_,i)=>{
-              return <span 
-              className={page===i+1 ? "pagination__selected" : ""}
-              onClick={()=> selectPageHandler(i+1)} 
-              key={i+1}>{i+1}</span>
-            })}
-            <span 
-            style={page=== (products.length/pageSize) ? {"display":'none'} : {"display":'block'}}
-            onClick={()=>selectPageHandler(next=>next+1)}>▶</span>
-          </div>}
+        {products.length >0 &&
+        (<Pagination 
+          page={page}
+          setPage={setPage}
+          totalPages={totalPages}
+          maxVisiblePages={maxVisiblePages}
+        />) }
     </div>
   )
 }
